@@ -17,10 +17,11 @@
         <Label>Give age:</Label>
         <Label x:Name="lAge">Age</Label>
         <Slider Maximum="100" x:Name="eAge" ValueChanged="OnSliderValueChanged" />
-        
-
+       
         <Button Text="Add to list" x:Name="SecondPageButton" Clicked="SecondPageButton_Clicked"></Button>
-        
+
+        <Button Text="View a list from online" x:Name="ApiPageButton" Clicked="ApiPageButton_Clicked"></Button>
+
     </StackLayout>
 
 </ContentPage>

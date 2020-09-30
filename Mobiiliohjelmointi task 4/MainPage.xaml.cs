@@ -77,5 +77,10 @@ namespace Mobiiliohjelmointi_task_4
             slider.Value = newStep * StepValue;
             lAge.Text = String.Format("Age: {0}", newStep);
         }
+
+        async private void ApiPageButton_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ApiPage());
+        }
     }
 }

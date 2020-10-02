@@ -1,10 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Input;
+using System.Net.Http;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,22 +10,34 @@ namespace Mobiiliohjelmointi_task_4
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ApiPage : ContentPage
     {
-        ObservableCollection<Person> PersonList = new ObservableCollection<Person>();
-        //public ObservableCollection<Person> PersonList { get { return people; } }
+        List<AddressFromApi> PersonList = new List<AddressFromApi>();
 
         public ApiPage()
         {
             InitializeComponent();
 
-            PersonList.Add(new Person("Pull down", "To get the real data", 69));
+            PersonList.Add(new AddressFromApi(69, "Pull ", "Down ", "This is hidden", "So is this"));
+            PersonList.Add(new AddressFromApi(69, "To ", "Refresh ", "This is hidden", "So is this"));
 
             MyListView.ItemsSource = PersonList;
         }
-        private void MyListView_Refreshing(object sender, EventArgs e)
+        async private void MyListView_Refreshing(object sender, EventArgs e)
         {
+            // start the refreshing animation and clear the list
             MyListView.IsRefreshing = true;
             PersonList.Clear();
-            PersonList.Add(new Person("Kalle", "Kuopio", 15));
+
+            // get Json from API
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync("https://codez.savonia.fi/jussi/api/json_data.php");
+            response.EnsureSuccessStatusCode();
+            string responseBody = await response.Content.ReadAsStringAsync();
+
+            // deserialize the response
+            PersonList = JsonConvert.DeserializeObject<List<AddressFromApi>>(responseBody);
+            MyListView.ItemsSource = PersonList;
+
+            // stop the refreshing animation
             MyListView.IsRefreshing = false;
         }
     }

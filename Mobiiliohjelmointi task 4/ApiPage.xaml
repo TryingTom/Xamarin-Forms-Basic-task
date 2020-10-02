@@ -6,20 +6,24 @@
             ItemsSource="{Binding PersonList}"
             CachingStrategy="RecycleElement"
             IsPullToRefreshEnabled="True"
-            Refreshing="MyListView_Refreshing"
-            IsRefreshing="False">
+            Refreshing="MyListView_Refreshing">
 
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
-                    <StackLayout Orientation="Horizontal">
-                        <Label Text="Name:"/>
-                        <Label Text="{Binding Name}"/>
-                        <Label Text="Address:"/>
-                        <Label Text="{Binding Address}"/>
-                        <Label Text="Age:"/>
-                        <Label Text="{Binding Age}"/>
-                    </StackLayout>
+                    <Grid>
+                        <Label Grid.Column="0" Grid.Row="0" Text="Name: " TextColor="red"/>
+                        <Label Grid.Column="1" Grid.Row="0" Text="{Binding nimi}" TextColor="red"/>
+
+                        <Label Grid.Column="2" Grid.Row="1" Text="Phone number: " TextColor="red"/>
+                        <Label Grid.Column="3" Grid.Row="1" Text="{Binding puhelin}" TextColor="red"/>
+
+                        <Label Grid.Column="0" Grid.Row="2" Text="Address: " TextColor="blue"/>
+                        <Label Grid.Column="1" Grid.Row="2" Text="{Binding osoite}" TextColor="blue"/>
+
+                        <Label Grid.Column="2" Grid.Row="3" Text="Date of birth: " TextColor="blue"/>
+                        <Label Grid.Column="3" Grid.Row="3" Text="{Binding syntyma_aika}" TextColor="blue"/>
+                    </Grid>
                 </ViewCell>
             </DataTemplate>
         </ListView.ItemTemplate>

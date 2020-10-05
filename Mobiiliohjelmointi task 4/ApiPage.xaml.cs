@@ -16,8 +16,8 @@ namespace Mobiiliohjelmointi_task_4
         {
             InitializeComponent();
 
-            PersonList.Add(new AddressFromApi(69, "Pull ", "Down ", "This is hidden", "So is this"));
-            PersonList.Add(new AddressFromApi(69, "To ", "Refresh ", "This is hidden", "So is this"));
+            PersonList.Add(new AddressFromApi(69, "Pull ", "Down ", "Pull", "Down"));
+            PersonList.Add(new AddressFromApi(420, "To ", "Refresh ", "To ", "Refresh "));
 
             MyListView.ItemsSource = PersonList;
         }
